@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Email Classifier - ML Project</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            overflow: hidden;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+        
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+        
+        .header p {
+            font-size: 1.1em;
+            opacity: 0.9;
+        }
+        
+        .main-content {
+            padding: 40px;
+        }
+        
+        .input-section {
+            margin-bottom: 30px;
+        }
+        
+        label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: #333;
+            font-size: 1.1em;
+        }
+        
+        textarea {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            font-size: 1em;
+            font-family: inherit;
+            resize: vertical;
+            transition: border-color 0.3s;
+        }
+        
+        textarea:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+        
+        .button-group {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        button {
+            flex: 1;
+            padding: 15px 30px;
+            font-size: 1.1em;
+            font-weight: 600;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .classify-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+        
+        .classify-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.4);
+        }
+        
+        .clear-btn {
+            background: #f0f0f0;
+            color: #333;
+        }
+        
+        .clear-btn:hover {
+            background: #e0e0e0;
+        }
+        
+        .results {
+            margin-top: 30px;
+            padding: 30px;
+            background: #f8f9fa;
+            border-radius: 15px;
+            display: none;
+        }
+        
+        .results.show {
+            display: block;
+            animation: slideIn 0.3s ease-out;
+        }
+        
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .prediction-card {
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+        }
+        
+        .category-badge {
+            display: inline-block;
+            padding: 10px 20px;
+            border-radius: 25px;
+            font-size: 1.2em;
+            font-weight: 700;
+            margin: 10px 0;
+        }
+        
+        .urgent { background: #ff4757; color: white; }
+        .spam { background: #ff6348; color: white; }
+        .newsletter { background: #1e90ff; color: white; }
+        .work { background: #2ed573; color: white; }
+        .personal { background: #ffa502; color: white; }
+        
+        .confidence-score {
+            font-size: 2em;
+            font-weight: 700;
+            color: #667eea;
+            margin: 15px 0;
+        }
+        
+        .score-bars {
+            margin-top: 20px;
+        }
+        
+        .score-item {
+            margin-bottom: 15px;
+        }
+        
+        .score-label {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 5px;
+            font-weight: 600;
+        }
+        
+        .score-bar {
+            height: 25px;
+            background: #e0e0e0;
+            border-radius: 12px;
+            overflow: hidden;
+        }
+        
+        .score-fill {
+            height: 100%;
+            border-radius: 12px;
+            transition: width 0.5s ease-out;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            padding-right: 10px;
+            color: white;
+            font-weight: 600;
+            font-size: 0.9em;
+        }
+        
+        .examples {
+            margin-top: 30px;
+            padding: 20px;
+            background: #f0f0f0;
+            border-radius: 10px;
+        }
+        
+        .examples h3 {
+            margin-bottom: 15px;
+            color: #333;
+        }
+        
+        .example-btn {
+            display: block;
+            width: 100%;
+            text-align: left;
+            padding: 12px;
+            margin-bottom: 8px;
+            background: white;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-size: 0.95em;
+        }
+        
+        .example-btn:hover {
+            border-color: #667eea;
+            transform: translateX(5px);
+        }
+        
+        .loading {
+            text-align: center;
+            padding: 20px;
+            display: none;
+        }
+        
+        .loading.show {
+            display: block;
+        }
+        
+        .spinner {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #667eea;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .error {
+            background: #ff4757;
+            color: white;
+            padding: 15px;
+            border-radius: 10px;
+            margin-top: 20px;
+            display: none;
+        }
+        
+        .error.show {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>📧 Email Classifier</h1>
+            <p>AI-powered email categorization with confidence scores</p>
+        </div>
+        
+        <div class="main-content">
+            <div class="input-section">
+                <label for="emailText">Enter Email Text:</label>
+                <textarea id="emailText" rows="6" placeholder="Paste your email content here..."></textarea>
+                
+                <div class="button-group">
+                    <button class="classify-btn" onclick="classifyEmail()">🔍 Classify Email</button>
+                    <button class="clear-btn" onclick="clearInput()">🗑️ Clear</button>
+                </div>
+            </div>
+            
+            <div class="examples">
+                <h3>📝 Try These Examples:</h3>
+                <button class="example-btn" onclick="loadExample('URGENT: Production server is down! All hands on deck!!!')">🚨 Urgent: Server down</button>
+                <button class="example-btn" onclick="loadExample('Congratulations! You won $1,000,000. Click here to claim!!!')">💰 Spam: Prize notification</button>
+                <button class="example-btn" onclick="loadExample('Weekly Tech Digest: Top 10 AI developments this week')">📰 Newsletter: Tech digest</button>
+                <button class="example-btn" onclick="loadExample('Team meeting scheduled for tomorrow at 2 PM. Please confirm attendance.')">💼 Work: Meeting invite</button>
+                <button class="example-btn" onclick="loadExample('Your Amazon order has shipped. Track your package here.')">📦 Personal: Delivery update</button>
+            </div>
+            
+            <div class="loading" id="loading">
+                <div class="spinner"></div>
+                <p style="margin-top: 10px;">Classifying email...</p>
+            </div>
+            
+            <div class="error" id="error"></div>
+            
+            <div class="results" id="results">
+                <div class="prediction-card">
+                    <h2>📊 Classification Results</h2>
+                    <div class="category-badge" id="categoryBadge"></div>
+                    <div class="confidence-score">
+                        Confidence: <span id="confidenceScore"></span>
+                    </div>
+                    
+                    <div class="score-bars" id="scoreBars"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        function loadExample(text) {
+            document.getElementById('emailText').value = text;
+        }
+        
+        function clearInput() {
+            document.getElementById('emailText').value = '';
+            document.getElementById('results').classList.remove('show');
+            document.getElementById('error').classList.remove('show');
+        }
+        
+        async function classifyEmail() {
+            const emailText = document.getElementById('emailText').value.trim();
+            
+            if (!emailText) {
+                showError('Please enter some email text to classify');
+                return;
+            }
+            
+            // Show loading
+            document.getElementById('loading').classList.add('show');
+            document.getElementById('results').classList.remove('show');
+            document.getElementById('error').classList.remove('show');
+            
+            try {
+                const response = await fetch('/classify', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ email_text: emailText })
+                });
+                
+                const data = await response.json();
+                
+                if (data.success) {
+                    displayResults(data);
+                } else {
+                    showError(data.error || 'Classification failed');
+                }
+            } catch (error) {
+                showError('Network error: ' + error.message);
+            } finally {
+                document.getElementById('loading').classList.remove('show');
+            }
+        }
+        
+        function displayResults(data) {
+            const category = data.predicted_category;
+            const confidence = (data.confidence * 100).toFixed(2);
+            const allScores = data.all_scores;
+            
+            // Update category badge
+            const badge = document.getElementById('categoryBadge');
+            badge.textContent = category.toUpperCase();
+            badge.className = 'category-badge ' + category;
+            
+            // Update confidence score
+            document.getElementById('confidenceScore').textContent = confidence + '%';
+            
+            // Create score bars
+            const scoreBars = document.getElementById('scoreBars');
+            scoreBars.innerHTML = '<h3 style="margin-bottom: 15px;">All Category Scores:</h3>';
+            
+            // Sort scores by value
+            const sortedScores = Object.entries(allScores).sort((a, b) => b[1] - a[1]);
+            
+            sortedScores.forEach(([cat, score]) => {
+                const percentage = (score * 100).toFixed(2);
+                const categoryColors = {
+                    urgent: '#ff4757',
+                    spam: '#ff6348',
+                    newsletter: '#1e90ff',
+                    work: '#2ed573',
+                    personal: '#ffa502'
+                };
+                
+                const scoreItem = document.createElement('div');
+                scoreItem.className = 'score-item';
+                scoreItem.innerHTML = `
+                    <div class="score-label">
+                        <span>${cat.toUpperCase()}</span>
+                        <span>${percentage}%</span>
+                    </div>
+                    <div class="score-bar">
+                        <div class="score-fill" style="width: ${percentage}%; background: ${categoryColors[cat]};">
+                        </div>
+                    </div>
+                `;
+                scoreBars.appendChild(scoreItem);
+            });
+            
+            // Show results
+            document.getElementById('results').classList.add('show');
+        }
+        
+        function showError(message) {
+            const errorDiv = document.getElementById('error');
+            errorDiv.textContent = '❌ ' + message;
+            errorDiv.classList.add('show');
+        }
+        
+        // Allow Enter key to submit (with Shift+Enter for new line)
+        document.getElementById('emailText').addEventListener('keydown', function(e) {
+            if (e.key === 'Enter' && !e.shiftKey) {
+                e.preventDefault();
+                classifyEmail();
+            }
+        });
+    </script>
+</body>
+</html>
