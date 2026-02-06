@@ -274,7 +274,7 @@
 <body>
     <div class="container">
         <div class="header">
-            <h1>📧 Email Classifier</h1>
+            <h1> Email Classifier</h1>
             <p>AI-powered email categorization with confidence scores</p>
         </div>
         
@@ -284,18 +284,18 @@
                 <textarea id="emailText" rows="6" placeholder="Paste your email content here..."></textarea>
                 
                 <div class="button-group">
-                    <button class="classify-btn" onclick="classifyEmail()">🔍 Classify Email</button>
-                    <button class="clear-btn" onclick="clearInput()">🗑️ Clear</button>
+                    <button class="classify-btn" onclick="classifyEmail()"> Classify Email</button>
+                    <button class="clear-btn" onclick="clearInput()"> Clear</button>
                 </div>
             </div>
             
             <div class="examples">
                 <h3>📝 Try These Examples:</h3>
-                <button class="example-btn" onclick="loadExample('URGENT: Production server is down! All hands on deck!!!')">🚨 Urgent: Server down</button>
-                <button class="example-btn" onclick="loadExample('Congratulations! You won $1,000,000. Click here to claim!!!')">💰 Spam: Prize notification</button>
-                <button class="example-btn" onclick="loadExample('Weekly Tech Digest: Top 10 AI developments this week')">📰 Newsletter: Tech digest</button>
-                <button class="example-btn" onclick="loadExample('Team meeting scheduled for tomorrow at 2 PM. Please confirm attendance.')">💼 Work: Meeting invite</button>
-                <button class="example-btn" onclick="loadExample('Your Amazon order has shipped. Track your package here.')">📦 Personal: Delivery update</button>
+                <button class="example-btn" onclick="loadExample('URGENT: Production server is down! All hands on deck!!!')"> Urgent: Server down</button>
+                <button class="example-btn" onclick="loadExample('Congratulations! You won $1,000,000. Click here to claim!!!')"> Spam: Prize notification</button>
+                <button class="example-btn" onclick="loadExample('Weekly Tech Digest: Top 10 AI developments this week')"> Newsletter: Tech digest</button>
+                <button class="example-btn" onclick="loadExample('Team meeting scheduled for tomorrow at 2 PM. Please confirm attendance.')">Work: Meeting invite</button>
+                <button class="example-btn" onclick="loadExample('Your Amazon order has shipped. Track your package here.')"> Personal: Delivery update</button>
             </div>
             
             <div class="loading" id="loading">
@@ -307,7 +307,7 @@
             
             <div class="results" id="results">
                 <div class="prediction-card">
-                    <h2>📊 Classification Results</h2>
+                    <h2>Classification Results</h2>
                     <div class="category-badge" id="categoryBadge"></div>
                     <div class="confidence-score">
                         Confidence: <span id="confidenceScore"></span>

@@ -10,16 +10,16 @@ from train_model import EmailClassifier
 
 def print_header():
     print("\n" + "="*60)
-    print("  📧 EMAIL CLASSIFIER - CLI Tool")
+    print("  EMAIL CLASSIFIER - CLI Tool")
     print("="*60 + "\n")
 
 def print_result(email, result):
     print("\n" + "-"*60)
     print(f"Email: {email[:100]}{'...' if len(email) > 100 else ''}")
     print("-"*60)
-    print(f"\n✅ Category: {result['predicted_category'].upper()}")
-    print(f"🎯 Confidence: {result['confidence']:.2%}\n")
-    print("📊 All Confidence Scores:")
+    print(f"\nCategory: {result['predicted_category'].upper()}")
+    print(f"Confidence: {result['confidence']:.2%}\n")
+    print("All Confidence Scores:")
     
     # Sort scores by value
     sorted_scores = sorted(result['all_scores'].items(), key=lambda x: x[1], reverse=True)
@@ -40,7 +40,7 @@ def main():
         model_path='/home/claude/email_classifier/models/email_classifier.pkl',
         vectorizer_path='/home/claude/email_classifier/models/vectorizer.pkl'
     )
-    print("✅ Model loaded successfully!\n")
+    print(" Model loaded successfully!\n")
     
     # Predefined examples
     examples = {
@@ -63,7 +63,7 @@ def main():
         choice = input("\nYour choice: ").strip().lower()
         
         if choice == 'q':
-            print("\n👋 Goodbye!\n")
+            print("\nGoodbye!\n")
             break
         
         elif choice in examples:
@@ -95,5 +95,5 @@ if __name__ == "__main__":
     try:
         main()
     except KeyboardInterrupt:
-        print("\n\n👋 Goodbye!\n")
+        print("\n\n Goodbye!\n")
         sys.exit(0)

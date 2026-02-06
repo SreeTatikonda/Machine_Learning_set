@@ -19,7 +19,6 @@ class EmailClassifier:
             lowercase=True
         )
         self.model = LogisticRegression(
-            multi_class='multinomial',
             max_iter=1000,
             random_state=42
         )
@@ -133,10 +132,11 @@ class EmailClassifier:
         print(f"Model saved to {model_path}")
     
     def load(self, model_path='models/email_classifier.pkl', vectorizer_path='models/vectorizer.pkl'):
-        """Load model and vectorizer"""
         self.model = joblib.load(model_path)
         self.vectorizer = joblib.load(vectorizer_path)
-        mappings = joblib.load('models/label_mappings.pkl')
+        import os
+        label_mappings_path = os.path.join(os.path.dirname(model_path), 'label_mappings.pkl')
+        mappings = joblib.load(label_mappings_path)
         self.label_mapping = mappings['label_mapping']
         self.reverse_label_mapping = mappings['reverse_label_mapping']
         print("Model loaded successfully!")

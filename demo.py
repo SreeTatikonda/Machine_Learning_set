@@ -50,15 +50,15 @@ def demo_prediction(classifier, email, category_emoji):
     
     # Category emojis
     emojis = {
-        'urgent': '🚨',
-        'spam': '🗑️',
-        'newsletter': '📰',
-        'work': '💼',
-        'personal': '📦'
+        'urgent': '',
+        'spam': '',
+        'newsletter': '',
+        'work': '',
+        'personal': ''
     }
     
     print(f"\n{emojis.get(category, '📧')} Category: {category.upper()}")
-    print(f"🎯 Confidence: {confidence:.1%}")
+    print(f" Confidence: {confidence:.1%}")
     
     # Visual confidence bar
     bar_length = 40
@@ -79,23 +79,23 @@ def demo_prediction(classifier, email, category_emoji):
 def main():
     print_banner()
     
-    print("\n🔄 Loading ML Model...")
+    print("\n Loading ML Model...")
     classifier = EmailClassifier()
     classifier.load(
         model_path='/home/claude/email_classifier/models/email_classifier.pkl',
         vectorizer_path='/home/claude/email_classifier/models/vectorizer.pkl'
     )
-    print("✅ Model loaded successfully!\n")
+    print(" Model loaded successfully!\n")
     
     time.sleep(1)
     
     # Demo cases
     demos = [
-        ("🚨", "URGENT: Production server down! Database connection failed. All services affected. Need immediate DevOps support!!!"),
-        ("🗑️", "Congratulations! You've been selected to win $1,000,000. Click this link NOW to claim your prize before it expires!!!"),
-        ("📰", "Weekly Tech Digest: This week's top stories include new AI breakthroughs, cloud computing trends, and startup funding news."),
-        ("💼", "Team standup rescheduled to 2 PM today. Please update your calendars and join via the usual Zoom link. See agenda attached."),
-        ("📦", "Your Amazon order #123-4567890-1234567 has been delivered. Package left at front door. Thank you for shopping with us!")
+        ("", "URGENT: Production server down! Database connection failed. All services affected. Need immediate DevOps support!!!"),
+        ("", "Congratulations! You've been selected to win $1,000,000. Click this link NOW to claim your prize before it expires!!!"),
+        ("", "Weekly Tech Digest: This week's top stories include new AI breakthroughs, cloud computing trends, and startup funding news."),
+        ("", "Team standup rescheduled to 2 PM today. Please update your calendars and join via the usual Zoom link. See agenda attached."),
+        ("", "Your Amazon order #123-4567890-1234567 has been delivered. Package left at front door. Thank you for shopping with us!")
     ]
     
     print("=" * 60)
