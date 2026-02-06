@@ -10,7 +10,7 @@ An intelligent email classification system that automatically categorizes emails
 
 Email management is overwhelming. People receive hundreds of emails daily, mixing urgent alerts with spam and newsletters. This project solves the problem of email organization by automatically categorizing emails with confidence scores, helping users prioritize their inbox.
 
-## 📊 Categories
+##  Categories
 
 The classifier categorizes emails into 5 categories:
 
@@ -76,7 +76,7 @@ email_classifier/
 
 ```bash
 # Clone the repository
-git clone <your-repo-url>
+git clone https://github.com/SreeTatikonda/Machine_Learning_set.git
 cd email_classifier
 
 # Install dependencies
