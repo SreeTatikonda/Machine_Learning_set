@@ -1,4 +1,4 @@
-# 📧 Email Classifier
+#  Email Classifier
 
 An intelligent email classification system that automatically categorizes emails into 5 categories with confidence scores using machine learning.
 
@@ -6,7 +6,7 @@ An intelligent email classification system that automatically categorizes emails
 [![scikit-learn](https://img.shields.io/badge/scikit--learn-1.3.0-orange.svg)](https://scikit-learn.org/)
 [![Flask](https://img.shields.io/badge/Flask-2.3.2-green.svg)](https://flask.palletsprojects.com/)
 
-## 🎯 Problem Statement
+## Problem Statement
 
 Email management is overwhelming. People receive hundreds of emails daily, mixing urgent alerts with spam and newsletters. This project solves the problem of email organization by automatically categorizing emails with confidence scores, helping users prioritize their inbox.
 
@@ -14,13 +14,13 @@ Email management is overwhelming. People receive hundreds of emails daily, mixin
 
 The classifier categorizes emails into 5 categories:
 
-- **🚨 Urgent** - Time-sensitive emails requiring immediate attention
-- **🗑️ Spam** - Promotional and unwanted emails
-- **📰 Newsletter** - Subscriptions and regular updates
-- **💼 Work** - Professional and team communication
-- **📦 Personal** - Banking, deliveries, appointments, etc.
+- ** Urgent** - Time-sensitive emails requiring immediate attention
+- ** Spam** - Promotional and unwanted emails
+- ** Newsletter** - Subscriptions and regular updates
+- ** Work** - Professional and team communication
+- ** Personal** - Banking, deliveries, appointments, etc.
 
-## ✨ Features
+##  Features
 
 - **High Accuracy**: Achieves 100% accuracy on test set
 - **Confidence Scores**: Provides probability scores for all categories
@@ -29,7 +29,7 @@ The classifier categorizes emails into 5 categories:
 - **Easy to Use**: Simple setup and intuitive interface
 - **Extensible**: Easy to retrain with custom data
 
-## 🏗️ Architecture
+##  Architecture
 
 ```
 Input Email → Text Preprocessing → TF-IDF Vectorization → 
@@ -48,7 +48,7 @@ Logistic Regression → Category + Confidence Scores
 - **Frontend**: Responsive HTML/CSS/JS
 - **Data**: Synthetic dataset (1000 samples)
 
-## 📁 Project Structure
+## Project Structure
 
 ```
 email_classifier/
@@ -70,7 +70,7 @@ email_classifier/
 └── README.md                   # This file
 ```
 
-## 🚀 Quick Start
+##  Quick Start
 
 ### Installation
 
@@ -87,7 +87,7 @@ pip install -r requirements.txt
 
 ### Usage Options
 
-#### 1️⃣ Web Interface (Recommended)
+#### Web Interface (Recommended)
 
 ```bash
 python src/app.py
@@ -102,7 +102,7 @@ Open your browser to `http://localhost:5000`
 - Pre-loaded examples
 - Interactive feedback
 
-#### 2️⃣ Command Line Interface
+####  Command Line Interface
 
 ```bash
 python src/classify_cli.py
@@ -114,7 +114,7 @@ python src/classify_cli.py
 - Custom email input
 - ASCII confidence bars
 
-#### 3️⃣ REST API
+####  REST API
 
 ```bash
 # Start the server
@@ -131,7 +131,7 @@ curl -X POST http://localhost:5000/classify_batch \
   -d '{"emails": ["Email 1", "Email 2"]}'
 ```
 
-#### 4️⃣ Python Script
+#### Python Script
 
 ```python
 from train_model import EmailClassifier
@@ -150,7 +150,7 @@ print(f"Confidence: {result['confidence']:.2%}")
 print(f"All scores: {result['all_scores']}")
 ```
 
-## 🔧 Retraining the Model
+## Retraining the Model
 
 ### With Your Own Data
 
@@ -190,7 +190,7 @@ python src/generate_data.py
 # Edit the templates in generate_data.py to add more examples
 ```
 
-## 📈 Model Performance
+## Model Performance
 
 **Current Performance:**
 - **Accuracy**: 100% on test set (200 samples)
@@ -208,7 +208,7 @@ python src/generate_data.py
 | "Team meeting at 3 PM" | Work | 41.91% |
 | "Amazon package delivered" | Personal | 71.41% |
 
-## 🎨 Screenshots
+## Screenshots
 
 ### Web Interface
 ![Web Interface](screenshot-placeholder.png)
@@ -216,13 +216,13 @@ python src/generate_data.py
 ### CLI Tool
 ```
 ==================================================
-  📧 EMAIL CLASSIFIER - CLI Tool
+   EMAIL CLASSIFIER - CLI Tool
 ==================================================
 
-✅ Category: URGENT
-🎯 Confidence: 66.62%
+Category: URGENT
+Confidence: 66.62%
 
-📊 All Confidence Scores:
+All Confidence Scores:
   urgent       ████████████████████████████████░░░░░░░░░░░░░░░░░░ 66.62%
   spam         ████░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░ 8.82%
   personal     ████░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░ 8.61%
@@ -230,7 +230,7 @@ python src/generate_data.py
   work         ███░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░ 7.92%
 ```
 
-## 🔍 API Documentation
+##  API Documentation
 
 ### Endpoints
 
@@ -297,7 +297,7 @@ Check if the API is running.
 }
 ```
 
-## 🧠 How It Works
+##  How It Works
 
 1. **Text Preprocessing**: 
    - Convert to lowercase
@@ -319,7 +319,7 @@ Check if the API is running.
    - Shows certainty for each category
    - Helps identify ambiguous cases
 
-## 🎯 Use Cases
+## Use Cases
 
 - **Email Client Integration**: Auto-sort incoming emails
 - **Productivity Tools**: Priority inbox management
@@ -327,7 +327,7 @@ Check if the API is running.
 - **Spam Filtering**: Enhanced spam detection
 - **Enterprise**: Automate email routing and triage
 
-## 🚀 Future Enhancements
+## Future Enhancements
 
 - [ ] Add more categories (promotions, social, etc.)
 - [ ] Support email metadata (sender, subject, time)
@@ -342,15 +342,15 @@ Check if the API is running.
 
 MIT License - feel free to use this project!
 
-## 🤝 Contributing
+## Contributing
 
 Contributions are welcome! Please feel free to submit a Pull Request.
 
-## 📧 Contact
+##  Contact
 
-Created by [Your Name] - [Your Email/GitHub]
+Created by Yasaswini(Sree Tatikonda)
 
-## 🙏 Acknowledgments
+##  Acknowledgments
 
 - scikit-learn for ML tools
 - Flask for web framework
@@ -358,4 +358,4 @@ Created by [Your Name] - [Your Email/GitHub]
 
 ---
 
-**⭐ If you found this project helpful, please give it a star!**
+** If you found this project helpful, please give it a star!**
